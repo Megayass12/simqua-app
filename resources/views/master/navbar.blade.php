@@ -4,7 +4,7 @@
 @endphp
 
 <header class="fixed top-0 left-0 w-full z-40">
-    <div class="bg-teal-950/10 border-b border-white/30 px-20 py-6 flex justify-between items-center">
+    <div class="bg-teal-950/10 border-b border-white/30 px-20 py-3 flex justify-between items-center">
 
         <!-- Logo -->
         <div class="flex items-center text-white text-xl font-semibold">

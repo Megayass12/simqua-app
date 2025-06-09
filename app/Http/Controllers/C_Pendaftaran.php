@@ -21,8 +21,10 @@ class C_Pendaftaran extends Controller
         ->where('user_id', auth()->id())
         ->exists();
 
+
         return view('user.V_Pendaftaran', compact('data', 'hasActiveSubmission'));
     }
+
 
     public function show($id)
     {

@@ -20,14 +20,14 @@
 
     <!-- Main Content -->
     <div class="flex flex-col items-center justify-center min-h-screen pt-28 px-8 relative z-10">
-        <div class="bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl shadow-lg p-6 w-full max-w-5xl">
-            <h2 class="text-xl font-semibold text-white pl-4 mb-4">Riwayat Daftar Ulang</h2>
+        <div class="bg-emerald-900/10 backdrop-blur-md border border-emerald-900/60 rounded-2xl shadow-lg p-6 w-full max-w-5xl">
+            <h2 class="text-xl font-semibold text-emerald-900 pl-4 mb-4">Riwayat Daftar Ulang</h2>
             <div class="overflow-y-auto max-h-[400px] px-4 custom-scrollbar">
                 <table class="min-w-full text-sm text-white">
                     <thead>
-                        <tr class="border-b border-white/60 text-left">
-                            <th class="p-3">Kode Pendaftaran</th>
-                            <th class="p-3 text-center">Aksi</th>
+                        <tr class="border-b border-emerald-900/60 text-left">
+                            <th class="p-3 text-emerald-900">Kode Pendaftaran</th>
+                            <th class="p-3 text-center text-emerald-900">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-white/60">
@@ -43,7 +43,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="2" class="p-3 text-center text-gray-400">Tidak ada pendaftaran yang sudah disetujui.</td>
+                                <td colspan="2" class="p-3 text-center text-emerald-900">Tidak ada pendaftaran yang sudah disetujui.</td>
                             </tr>
                         @endforelse
                     </tbody>

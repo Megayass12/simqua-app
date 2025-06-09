@@ -43,6 +43,6 @@ class C_Daful extends Controller
         ]);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('user.V_DaftarUlang.index')->with('success', 'Daftar ulang berhasil disimpan!');
+        return redirect()->route('daftarUlang.index')->with('success', 'Daftar ulang berhasil disimpan!');
     }
 }

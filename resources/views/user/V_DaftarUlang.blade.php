@@ -57,7 +57,7 @@
         class="fixed inset-0 z-40 flex items-center justify-center bg-black/60 backdrop-blur-sm">
         <div class="bg-white rounded-2xl p-6 w-[400px] max-w-full relative text-gray-800 shadow-xl">
             <h2 class="text-2xl font-bold text-center mb-4">Form Daftar Ulang</h2>
-            <form action="{{ route('daftar-ulang.simpan') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('daftarUlang.simpan') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
                     <label class="block text-sm font-semibold mb-1">Kode Pendaftaran</label>

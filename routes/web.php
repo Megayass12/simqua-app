@@ -47,7 +47,10 @@ Route::middleware(['user'])->group(function () {
 
     // Pendaftaran
     Route::get('/pendaftaran', [C_Pendaftaran::class, 'pendaftaran'])->name('V_Pendaftaran');
-    Route::get('/daftar-ulang', [C_Daful::class, 'daftarUlang'])->name('V_DaftarUlang');
+    Route::get('/daftar-ulang', [C_Daful::class, 'index'])->name('daftarUlang.index');
+    Route::post('/daftar-ulang', [C_Daful::class, 'simpanDaftarUlang'])->name('daftarUlang.simpan');
+
+    // Pendaftaran
     Route::post('/pendaftaran/simpan', [C_Pendaftaran::class, 'simpan'])->name('pendaftaran.simpan');
     Route::get('/pendaftaran/{id}', [C_Pendaftaran::class, 'show'])->name('pendaftaran.show');
 });

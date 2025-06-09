@@ -16,7 +16,7 @@ class C_Regist extends Controller
     {
         $rules = [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|max:8|confirmed',
+            'password' => 'required|string|min:8|max:10|confirmed',
         ];
 
         $messages = [
@@ -25,7 +25,7 @@ class C_Regist extends Controller
             'email.unique' => 'Email sudah digunakan!',
             'password.required' => 'Password belum terisi!',
             'password.min' => 'Password minimal 8 karakter!',
-            'password.max' => 'Password maksimal 8 karakter!',
+            'password.max' => 'Password maksimal 10 karakter!',
             'password.confirmed' => 'Konfirmasi password tidak sesuai!',
         ];
 

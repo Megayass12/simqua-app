@@ -55,6 +55,14 @@ Route::middleware(['user'])->group(function () {
     Route::get('/pendaftaran/{id}', [C_Pendaftaran::class, 'show'])->name('pendaftaran.show');
 });
 
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin/pendaftaran', [C_Pendaftaran::class, 'adminPendaftaran'])->name('admin.pendaftaran');
+    Route::put('/admin/pendaftaran/{id}', [C_Pendaftaran::class, 'ubahStatus']);
+
+    //Verifikasi
+
+});
+
 
 // Jika kamu punya route khusus admin, contoh:
 // Route::middleware(['admin'])->group(function () {

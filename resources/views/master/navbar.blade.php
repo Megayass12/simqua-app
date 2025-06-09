@@ -18,7 +18,7 @@
         <div class="flex items-center gap-10">
             @if(isset($isAdmin) && $isAdmin)
                 <!-- Menu untuk Admin -->
-                <a href="{{ route('admin.pengajuan') }}" class="text-green hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                <a href="{{ route('admin.pendaftaran') }}" class="text-green hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Pendaftaran
                 </a>
             @elseif(isset($isCalonSantri) && $isCalonSantri)

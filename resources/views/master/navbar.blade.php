@@ -18,26 +18,33 @@
         <div class="flex items-center gap-10">
             @if(isset($isAdmin) && $isAdmin)
                 <!-- Menu untuk Admin -->
+                <a href="{{ route('V_Dashboard') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                    Home
+                </a>
+                {{-- @if(Route::has('informasi.show'))
+                    <a href="{{ route('informasi.show') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                        Informasi
+                    </a>
+                @endif --}}
                 <a href="{{ route('admin.pendaftaran') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Pendaftaran
                 </a>
             @elseif(isset($isCalonSantri) && $isCalonSantri)
                 <!-- Menu untuk Calon Santri -->
-                <a href="{{ route('V_Dashboard') }}" class="text-white font-bold hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                <a href="{{ route('V_Dashboard') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Home
                 </a>
-
-                @if(Route::has('V_Pendaftaran'))
-                    <a href="{{ route('V_Pendaftaran') }}" class="text-white font-bold hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
-                        Pendaftaran
-                    </a>
-                @endif
-
-                @if(Route::has('daftarUlang.index'))
-                    <a href="{{ route('daftarUlang.index') }}" class="text-white font-bold hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
-                        Daftar Ulang
-                    </a>
-                @endif
+                {{-- @if(Route::has('V_Informasi'))
+                <a href="{{ route('V_Informasi') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                    Informasi
+                </a>
+                @endif --}}
+                <a href="{{ route('V_Pendaftaran') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                    Pendaftaran
+                </a>
+                <a href="{{ route('daftarUlang.index') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                    Daftar Ulang
+                </a>
             @endif
 
             <!-- Menu Profil -->

@@ -59,21 +59,10 @@ Route::middleware(['user'])->group(function () {
 Route::middleware(['admin'])->group(function () {
     // Verifikasi
     Route::get('/admin/verifikasi', [C_Pendaftaran::class, 'adminPendaftaran'])->name('admin.pendaftaran');
-    Route::put('/admin/verifikasi/{id}', [C_Pendaftaran::class, 'ubahStatus']);
-
-    // Informasi
-    //Route::prefix('katalog')->group(function () {
-        //     Route::get('/', [KatalogController::class, 'ShowDataKatalog'])->name('admin.katalog.index');
-        //     Route::get('/tambah', [KatalogController::class, 'ShowFormTambahKatalog'])->name('admin.katalog.create');
-        //     Route::post('/', [KatalogController::class, 'KlikSimpan'])->name('admin.katalog.store');
-        //     Route::get('/{id}/edit', [KatalogController::class, 'ShowFormUbahKatalog'])->name('admin.katalog.edit');
-        //     Route::put('/{id}', [KatalogController::class, 'KlikUbah'])->name('admin.katalog.update');
-        //     Route::delete('/{id}', [KatalogController::class, 'destroy'])->name('admin.katalog.destroy');
-        //     Route::get('/{id}/detail', [KatalogController::class, 'detail'])->name('admin.katalog.detail');
-        // });
-    // Route::get('/informasi/{id}', [C_Informasi::class, 'show'])->name('informasi.show');
-    // Route::post('/informasi/simpan', [C_Informasi::class, 'simpan'])->name('infomasi.simpan');
+    Route::put('/admin/verifikasi/{id}/{status}', [C_Pendaftaran::class, 'ubahStatus'])->name('admin.verifikasi');
 });
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -82,12 +71,3 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profil', [C_Profil::class, 'profil'])->name('V_Profil');
     Route::put('/profil', [C_Profil::class, 'update'])->name('profil.update');
 });
-
-
-
-// Jika kamu punya route khusus admin, contoh:
-// Route::middleware(['admin'])->group(function () {
-//     Route::get('/admin', function () {
-//         return view('admin.dashboard');
-//     });
-// });

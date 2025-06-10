@@ -12,29 +12,29 @@ class C_Pendaftaran extends Controller
 {
     public function pendaftaran()
     {
-    $data = Pendaftaran::with('user') // Load user relationship
-        ->where('status', 'Proses')
-        ->where('user_id', auth()->id())
-        ->orderBy('created_at', 'desc')
-        ->get();
+        $data = Pendaftaran::with('user')
+            ->where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-    $hasActiveSubmission = Pendaftaran::where('status', 'Proses')
-        ->where('user_id', auth()->id())
-        ->exists();
+        $hasActiveSubmission = Pendaftaran::where('status', 'Proses')
+            ->orWhere('status', 'Disetujui')
+            ->where('user_id', auth()->id())
+            ->exists();
 
-    return view('user.V_Pendaftaran', compact('data', 'hasActiveSubmission'));
+
+        return view('user.V_Pendaftaran', compact('data', 'hasActiveSubmission'));
     }
-
 
 
     public function show($id)
     {
-    $pendaftaran = Pendaftaran::with('user')->findOrFail($id); // Load user relationship
+        $pendaftaran = Pendaftaran::with('user')->get();
 
-    return response()->json([
-        'status' => 'success',
-        'data' => $pendaftaran,
-    ]);
+        return response()->json([
+            'status' => 'success',
+            'data' => $pendaftaran,
+        ]);
     }
 
 
@@ -55,11 +55,11 @@ class C_Pendaftaran extends Controller
     public function simpan(Request $request)
     {
         $existing = Pendaftaran::where('user_id', Auth::id())
-                        ->where('status', 'Proses')
-                        ->first();
+            ->where('status', 'Proses')
+            ->first();
 
         if ($existing) {
-        return redirect()->back()->with('error', 'Anda hanya dapat membuat satu pendaftaran dengan status Proses.');
+            return redirect()->back()->with('error', 'Anda hanya dapat membuat satu pendaftaran dengan status Proses.');
         }
 
 
@@ -69,13 +69,13 @@ class C_Pendaftaran extends Controller
             'tempat' => 'required|string|max:255',
             'tanggal' => 'required|date',
             'alamat' => 'required|string',
-            'no_hp'=>'required|string|max:13'
+            'no_hp' => 'required|string|max:13'
         ];
 
         $messages = [
             'nama.required' => 'Nama belum diisi!',
             'nama.max' => 'Nama terlalu panjang (maks 255 karakter).',
-            'no_hp.max' =>'No.Hp Salah satu orang tua saja'
+            'no_hp.max' => 'No.Hp Salah satu orang tua saja'
         ];
 
         $validated = $request->validate($rules, $messages);
@@ -100,17 +100,12 @@ class C_Pendaftaran extends Controller
         return redirect()->back()->with('success', 'Pendaftaran berhasil!');
     }
 
-    public function ubahStatus(Request $request, $id)
+    public function ubahStatus(Request $request, $id, $status)
     {
-        $request->validate([
-            'status' => 'required|in:Disetujui,Ditolak',
-            'feedback' => 'nullable|string|max:1000',
-        ]);
         $pendaftaran = Pendaftaran::findOrFail($id);
-        $pendaftaran->status = $request->status;
-        $pendaftaran->feedback = $request->feedback;
+        $pendaftaran->status = $status;
         $pendaftaran->save();
 
-        return redirect()->back()->with('success', 'Status berhasil diubah.');
+        return redirect()->back()->with('success', "Status berhasil diubah {$status}.");
     }
 }

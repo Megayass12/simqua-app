@@ -23,7 +23,7 @@
         <div class="bg-white border-emerald-900/60 rounded-2xl shadow-lg p-6 w-full max-w-5xl">
             <h2 class="text-xl font-semibold text-emerald-900 pl-4 mb-4">Daftar Ulang</h2>
             <div class="overflow-y-auto max-h-[400px] px-4 custom-scrollbar">
-                <table class="min-w-full text-sm text-white">
+                <table class="min-w-full text-sm text-emerald-900">
                     <thead>
                         <tr class="border-b border-emerald-900/60 text-left">
                             <th class="p-3 text-emerald-900">Kode Pendaftaran</th>

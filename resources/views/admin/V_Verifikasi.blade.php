@@ -173,7 +173,7 @@
                                 class="absolute right-0 mt-2 bg-white shadow-lg rounded-xl border px-4 py-3 flex gap-3 z-50">
 
                                 <!-- Verifikasi -->
-                                <form method="POST" :action="'/admin/verifikasi/' + detailUser.id">
+                                <form method="POST" :action="'/admin/verifikasi/' + detailUser.id + '/Disetujui'">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit"
@@ -182,10 +182,9 @@
                                     </button>
                                 </form>
 
-                                <!-- Tolak -->
-                                <form method="POST" :action="'/admin/tolak/' + detailUser.id"
+                                <form method="POST" :action="'/admin/verifikasi/' + detailUser.id + '/Ditolak'">
                                     @csrf
-                                    @method('DELETE')
+                                    @method('PUT')
                                     <button type="submit"
                                         class="text-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-semibold">
                                         Tolak

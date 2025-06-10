@@ -58,23 +58,12 @@ Route::middleware(['user'])->group(function () {
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/verifikasi', [C_Pendaftaran::class, 'adminPendaftaran'])->name('admin.pendaftaran');
-    Route::put('/admin/verifikasi/{id}', [C_Pendaftaran::class, 'ubahStatus']);
+    Route::put('/admin/verifikasi/{id}/{status}', [C_Pendaftaran::class, 'ubahStatus'])->name('admin.verifikasi');
 });
 
-//     Route::get('/admin/profil', [C_Profil::class, 'profil'])->name('V_Profil');
-//     Route::put('admin/profil', [C_Profil::class, 'update'])->name('profil.update');
-// });
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profil', [C_Profil::class, 'profil'])->name('V_Profil');
     Route::put('/profil', [C_Profil::class, 'update'])->name('profil.update');
 });
-
-
-
-// Jika kamu punya route khusus admin, contoh:
-// Route::middleware(['admin'])->group(function () {
-//     Route::get('/admin', function () {
-//         return view('admin.dashboard');
-//     });
-// });

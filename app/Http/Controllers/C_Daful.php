@@ -12,8 +12,10 @@ class C_Daful extends Controller
      */
     public function index()
     {
-        // Ambil data pendaftaran yang sudah disetujui (status = 'approved')
-        $data = Pendaftaran::where('status', 'approved')->get();
+        $user = auth()->user();
+        $data = Pendaftaran::where('status', 'Disetujui')
+        ->where('user_id', $user->id)
+        ->get();
 
         return view('user.V_DaftarUlang', compact('data'));
     }

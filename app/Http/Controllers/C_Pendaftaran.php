@@ -46,7 +46,7 @@ class C_Pendaftaran extends Controller
 
         $data = $query->orderByDesc('created_at')->get();
 
-        return view('admin.V_Pendaftaran', compact('data'));
+        return view('admin.V_Verifikasi', compact('data'));
     }
 
     public function simpan(Request $request)

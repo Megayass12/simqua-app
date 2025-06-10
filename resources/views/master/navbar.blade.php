@@ -4,37 +4,37 @@
 @endphp
 
 <header class="fixed top-0 left-0 w-full z-40">
-    <div class="bg-teal-950/10 border-b border-white/30 px-20 py-3 flex justify-between items-center">
+    <div class="bg-teal-950 border-b border-white/30 px-20 py-3 flex justify-between items-center">
 
         <!-- Logo -->
         <div class="flex items-center text-white text-xl font-semibold">
             <a href="{{ route('V_Dashboard') }}">
                 <img src="{{ asset('assets/ppmq.png') }}" alt="PPMQ Logo" class="h-12">
             </a>
-            <h1 class="text-xl font-bold text-emerald-900">SIMQUA</h1>
+            <h1 class="text-xl font-bold text-white">SIMQUA</h1>
         </div>
 
         <!-- Navigation -->
         <div class="flex items-center gap-10">
             @if(isset($isAdmin) && $isAdmin)
                 <!-- Menu untuk Admin -->
-                <a href="{{ route('admin.pendaftaran') }}" class="text-green hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                <a href="{{ route('admin.pendaftaran') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Pendaftaran
                 </a>
             @elseif(isset($isCalonSantri) && $isCalonSantri)
                 <!-- Menu untuk Calon Santri -->
-                <a href="{{ route('V_Dashboard') }}" class="text-emerald-900 font-bold hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                <a href="{{ route('V_Dashboard') }}" class="text-white font-bold hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Home
                 </a>
 
                 @if(Route::has('V_Pendaftaran'))
-                    <a href="{{ route('V_Pendaftaran') }}" class="text-emerald-900 font-bold hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                    <a href="{{ route('V_Pendaftaran') }}" class="text-white font-bold hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                         Pendaftaran
                     </a>
                 @endif
 
                 @if(Route::has('daftarUlang.index'))
-                    <a href="{{ route('daftarUlang.index') }}" class="text-emerald-900 font-bold hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                    <a href="{{ route('daftarUlang.index') }}" class="text-white font-bold hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                         Daftar Ulang
                     </a>
                 @endif

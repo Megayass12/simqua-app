@@ -20,8 +20,8 @@
 
     <!-- Main Content -->
     <div class="flex flex-col items-center justify-center min-h-screen pt-28 px-8 relative z-10">
-        <div class="bg-emerald-900/10 backdrop-blur-md border border-emerald-900/60 rounded-2xl shadow-lg p-6 w-full max-w-5xl">
-            <h2 class="text-xl font-semibold text-emerald-900 pl-4 mb-4">Riwayat Daftar Ulang</h2>
+        <div class="bg-white border-emerald-900/60 rounded-2xl shadow-lg p-6 w-full max-w-5xl">
+            <h2 class="text-xl font-semibold text-emerald-900 pl-4 mb-4">Daftar Ulang</h2>
             <div class="overflow-y-auto max-h-[400px] px-4 custom-scrollbar">
                 <table class="min-w-full text-sm text-white">
                     <thead>

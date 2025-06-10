@@ -38,32 +38,57 @@
     @endif
 
     <div x-data="{ showTambahPendaftaran: false }" class="flex flex-col items-center justify-center min-h-screen pt-28 px-8 relative z-10">
-        <div class="bg-green/10 backdrop-blur-md border border-white/60 rounded-2xl shadow-lg p-6 w-full max-w-5xl">
+        <div class="bg-white border-white rounded-2xl shadow-lg p-6 w-full max-w-5xl">
             <h2 class="text-xl font-semibold text-emerald-900 pl-4 mb-4">Pendaftaran</h2>
             <div class="overflow-y-auto max-h-[300px] min-h-[300px] px-4 custom-scrollbar">
-                <table class="min-w-full text-sm text-emerald-900">
-                    <thead>
-                        <tr class="border-b border-white/60 text-left">
-                            <th class="text-center p-3">Tanggal</th>
-                            <th class="text-center p-3">Kode Pendaftaran</th>
-                            <th class="text-center p-3">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-white/60">
-                        @forelse ($data as $item)
-                            <tr class="hover:bg-white/10 transition">
-                                <td class="p-3 text-center">{{ $item->created_at->format('d-m-Y') }}</td>
-                                <td class="p-3 text-center">{{ $item->kode }}</td>
-                                <td class="p-3 text-center">{{ $item->status }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3" class="p-3 text-center text-gray-400">Tidak ada pendaftaran yang sedang diproses.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+    <table class="min-w-full text-sm text-emerald-900">
+        <thead>
+            <tr class="border-b border-white/60 text-left">
+                <th class="text-center p-3">Tanggal</th>
+                <th class="text-center p-3">Kode Pendaftaran</th>
+                <th class="text-center p-3">Status</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-white/60">
+            @forelse ($data as $item)
+                <!-- Row Utama -->
+                <tr class="hover:bg-white/10 transition">
+                    <td class="p-3 text-center">
+                        <div class="bg-emerald-900/20 backdrop-blur-sm px-3 py-1 rounded-md text-sm flex items-center justify-center">
+                            {{ $item->created_at->format('d-m-Y') }}
+                        </div>
+                    </td>
+                    <td class="p-3 text-center">{{ $item->kode }}</td>
+                    <td class="p-3 text-center">
+                        <div class="flex items-center gap-2 justify-center">
+                            <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+                            {{ $item->status }}
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Row Detail -->
+                <tr class="bg-emerald-900/10">
+                    <td colspan="3" class="p-3">
+                        <div class="text-sm text-emerald-900 space-y-1">
+                            <p><strong>Nama:</strong> {{ $item->nama }}</p>
+                            <p><strong>NISN:</strong> {{ $item->nisn }}</p>
+                            <p><strong>Tempat Lahir:</strong> {{ $item->tempat }}</p>
+                            <p><strong>Tanggal Lahir:</strong> {{ $item->tanggal }}</p>
+                            <p><strong>Alamat:</strong> {{ $item->alamat }}</p>
+                            <p><strong>No. HP:</strong> {{ $item->no_hp }}</p>
+                        </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="3" class="p-3 text-center text-gray-400">Tidak ada pendaftaran yang sedang diproses.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
         </div>
 
         <!-- Form Tambah -->
@@ -141,9 +166,17 @@
         </div>
 
         <div class="w-full max-w-5xl mt-4 mx-auto">
-            <button @click="showTambahPendaftaran = true" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500">
-                Tambah
-            </button>
+            @if (!$hasActiveSubmission)
+        <button @click="showTambahPendaftaran = true"
+            class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500">
+            Tambah Pendaftaran
+        </button>
+    @else
+        <button disabled
+            class="px-6 py-2 bg-gray-500 text-white rounded-lg cursor-not-allowed">
+            Anda sudah memiliki pendaftaran aktif
+        </button>
+    @endif
         </div>
     </div>
 

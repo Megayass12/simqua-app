@@ -20,7 +20,7 @@ class C_Profil extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        $inputFields = ['username', 'password'];
+        $inputFields = ['email', 'password'];
 
         $filledAny = false;
         foreach ($inputFields as $field) {
@@ -35,41 +35,25 @@ class C_Profil extends Controller
         }
 
         $rules = [
-            'email' => 'nullable|string|max:255|unique:users,username,' . $user->id,
-            'password' => 'nullable|string|min:8|max:8',
+            'password' => 'nullable|string|min:8|max:10',
         ];
 
         if (!$user->isAdmin()) {
-            $rules = array_merge($rules, [
-                'nama' => 'nullable|string|max:255',
-                'telepon' => 'nullable|digits_between:12,16',
-                'alamat' => 'nullable|string|max:255',
-            ]);
+            $rules['email'] = 'nullable|string|max:255|unique:users,email,' . $user->id;
         }
 
         $messages = [
             'email.unique' => 'Email sudah digunakan!',
             'password.min' => 'Password minimal 8 karakter!',
-            'password.max' => 'Password maksimal 8 karakter!',
+            'password.max' => 'Password maksimal 10 karakter!',
         ];
 
         $validated = $request->validate($rules, $messages);
 
-        if (isset($validated['email'])) {
+        if (isset($validated['email']) && !$user->isAdmin()) {
             $user->email = $validated['email'];
         }
 
-        if (!$user->isAdmin()) {
-            if (isset($validated['email'])) {
-                $user->email = $validated['email'];
-            }
-            if ($request->filled('telepon')) {
-                $user->telepon = $validated['telepon'];
-            }
-            if ($request->filled('alamat')) {
-                $user->alamat = $validated['alamat'];
-            }
-        }
 
         if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);

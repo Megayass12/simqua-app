@@ -2,7 +2,7 @@
 @section('title', 'Profil')
 @section('content')
 
-    <section x-data="profilModal" class="font-sans min-h-screen bg-cover bg-green-900 bg-center">
+    <section x-data="profilModal" class="font-sans min-h-screen bg-cover">
 
         <!-- Header -->
         @include('master.navbar')
@@ -15,7 +15,7 @@
                 <!-- Logo -->
                 <div
                     class="flex-shrink-0 bg-transparent rounded-full w-14 h-14 flex items-center justify-center overflow-hidden">
-                    <img src="{{ asset('assets/rawlogo.png') }}" alt="Logo" class="h-6 w-6 object-cover">
+                    <img src="{{ asset('assets/ppmq.png') }}" alt="Logo" class="h-6 w-6 object-cover">
                 </div>
 
                 <!-- Isi alert -->
@@ -38,7 +38,7 @@
                 <!-- Logo -->
                 <div
                     class="flex-shrink-0 bg-transparent rounded-full w-14 h-14 flex items-center justify-center overflow-hidden">
-                    <img src="{{ asset('assets/rawlogo.png') }}" alt="Logo" class="h-6 w-6 object-cover">
+                    <img src="{{ asset('assets/ppmq.png') }}" alt="Logo" class="h-6 w-6 object-cover">
                 </div>
 
                 <!-- Isi alert -->
@@ -57,152 +57,57 @@
             </div>
         @endif
 
-        {{-- Main --}}
-        <div class="flex flex-col items-center justify-center min-h-screen pt-16 px-16 relative z-10 bg-cover bg-center">
-            <div class="h-[5%] w-full bg-gradient-to-t from-slate-950 to-transparent -bottom-0 absolute z-10"></div>
-            <img src="{{ asset('assets/Ornament.png') }}" alt="" class="h-[1012px] w-[1440px] -bottom-0 absolute">
-
-            <!-- WRAPPER: dua kolom sejajar -->
-            <div class="flex flex-row gap-6 relative z-20">
-                <!-- KIRI -->
-                <div class="flex flex-col w-[500px] gap-4">
-                    <!-- PROFIL -->
-                    <div
-                        class="h-[370px] w-[500px] bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl shadow-lg p-6 text-white">
-                        <div class="flex flex-col items-center justify-center border-b border-white">
-                            <div class="flex flex-col items-center mb-4">
-                                <h2 class="text-2xl font-semibold">Profil</h2>
-                                @if (!Auth::user()->isAdmin())
-                                    <p class="text-sm">Data profil anda dalam Simbako</p>
-                                @endif
-                            </div>
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="w-16 h-16 rounded-full flex items-center justify-center text-sm">
-                                    <img src="{{ asset('assets/avatar.png') }}" alt="">
-                                </div>
-                                <div class="text-xl">{{ Auth::user()->username }}</div>
-                            </div>
-                        </div>
-
-                        <div class="py-2 border-b border-white flex justify-between">
-                            <span>Nama</span>
-                            <span class="ml-auto text-right">{{ Auth::user()->nama }}</span>
-                        </div>
-                        <div class="py-2 border-b border-white flex justify-between">
-                            <span>Nomor Telepon</span>
-                            <span class="ml-auto text-right">{{ Auth::user()->telepon }}</span>
-                        </div>
-                        <div class="py-2 flex justify-between">
-                            <span>Alamat</span>
-                            <span class="ml-auto text-right break-words" style="max-width: 250px;">
-                                {{ Auth::user()->alamat }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- PENGATURAN -->
-                    <div
-                        class="w-[500px] bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl p-6 text-white shadow-lg">
-                        <div class="flex flex-col items-center justify-center border-b border-white">
-                            <h2 class="text-xl font-bold mb-2">Pengaturan</h2>
-                        </div>
-                        <form action="{{ route('logout') }}" method="POST" class="inline"">
-                            @csrf
-                            <button
-                                class="bg-orange-600 text-white py-1 px-4 rounded flex items-center gap-2 mt-3 transition-all duration-500 ease-in-out w-fit group hover:w-full hover:animate-[bounce-expand-left_0.4s_ease-in-out]">
-                                <span>Keluar</span>
-                                <svg class="ml-auto transition-all duration-500 ease-in-out group-hover:translate-x-2"
-                                    xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"
-                                    fill="currentColor">
-                                    <path
-                                        d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </form>
-                        <style>
-                            @keyframes bounce-expand-left {
-                                0% {
-                                    transform: scaleX(1);
-                                    transform-origin: left;
-                                }
-
-                                30% {
-                                    transform: scaleX(1.05);
-                                    transform-origin: left;
-                                }
-
-                                60% {
-                                    transform: scaleX(0.98);
-                                    transform-origin: left;
-                                }
-
-                                100% {
-                                    transform: scaleX(1);
-                                    transform-origin: left;
-                                }
-                            }
-                        </style>
-                    </div>
-
+        <!-- MAIN -->
+        <div class="flex items-center justify-center min-h-screen bg-cover px-4 py-8" 
+            style="background-image: url({{ asset('assets/BG-PD.jpg') }})">
+            <div class="w-full max-w-2xl bg-white border-black/60 rounded-2xl shadow-lg p-6 text-emerald-900 relative">
+                <!-- HEADER -->
+                <div class="flex flex-col items-center mb-6 border-b border-emerald-900 pb-4">
+                    <h2 class="text-2xl font-semibold">Profil Anda</h2>
                 </div>
 
-                <!-- KANAN -->
-                <div
-                    class="w-[500px] bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl p-6 text-white shadow-lg">
-                    <div class="flex flex-col items-center mb-8">
-                        <h2 class="text-2xl font-semibold">Data Kredensial</h2>
-                        @if (!Auth::user()->isAdmin())
-                            <p class="text-sm">Data penting anda yang telah kami verifikasi</p>
-                        @endif
+                <!-- ISI PROFIL -->
+                <div class="space-y-4">
+                    <div class="flex justify-between border-b border-emerald-900 py-2">
+                        <span>Email</span>
+                        <span class="text-right">{{ Auth::user()->email }}</span>
                     </div>
-                    <div class="py-2 border-b border-white flex justify-between">
-                        <span>Email<span class="text-red-500">*</span></span>
-                        <span class="ml-auto text-right">{{ Auth::user()->email }}</span>
-                    </div>
-                    @if (!Auth::user()->isAdmin())
-                        <div class="py-2 border-b border-white flex justify-between">
-                            <span>Nomor SIINAS<span class="text-red-500">*</span></span>
-                            <span class="ml-auto text-right">{{ Auth::user()->siinas }}</span>
-                        </div>
-                        <div class="py-2 border-b border-white flex justify-between">
-                            <span>Nomor KBLI<span class="text-red-500">*</span></span>
-                            <span class="ml-auto text-right">{{ Auth::user()->kbli }}</span>
-                        </div>
-                    @endif
-
-                    <div class="py-2 flex justify-between">
-                        <span>Username</span>
-                        <span class="ml-auto text-right">{{ Auth::user()->username }}</span>
-                    </div>
-                    <div class="py-2 border-b border-white flex justify-between">
+                    <div class="flex justify-between border-b border-emerald-900 py-2">
                         <span>Password</span>
-                        <span class="ml-auto text-right">********</span>
+                        <span class="text-right">{{ Auth::user()->password }}</span>
                     </div>
-                    @if (!Auth::user()->isAdmin())
-                        <div class="text-xs text-red-500 mt-4 mb-4">
-                            *Data kredensial tidak dapat diubah karena telah melalui verifikasi data ketika anda melakukan
-                            registrasi.
-                        </div>
-                    @endif
+                </div>
 
-                    <!-- Tombol Ubah Profil -->
-                    <div class="flex justify-end">
-                        <button @click="showUbahProfil = true"
-                            class="bg-white text-black border-2 border-green-900 font-semibold mt-2 py-2 px-4 rounded hover:bg-green-900 hover:border-white hover:text-white transform transition-transform duration-300 hover:scale-110">
-                            Ubah Profil
+                <!-- TOMBOL DI BAWAH -->
+                <div class="flex justify-start gap-4 mt-8">
+                    <!-- Tombol Logout -->
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button
+                            class="bg-orange-600 text-white py-2 px-4 rounded flex items-center gap-2 transition-all hover:bg-orange-700">
+                            <span>Keluar</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z" />
+                            </svg>
                         </button>
-                    </div>
+                    </form>
+
+                    <!-- Tombol Ubah -->
+                    <button @click="showUbahProfil = true"
+                        class="bg-white text-black border-2 border-green-900 font-semibold py-2 px-4 rounded hover:bg-green-900 hover:border-white hover:text-white">
+                        Ubah Profil
+                    </button>
                 </div>
             </div>
         </div>
+
 
         <!-- Modal Ubah Profil -->
         <div x-show="showUbahProfil" x-cloak x-transition
             class="fixed inset-0 z-40 flex items-center justify-center pt-4 bg-black/60 backdrop-blur-sm">
             <div @click.outside="showUbahProfil = false"
                 class="bg-white rounded-2xl p-8 w-[400px] max-w-full relative text-gray-800 shadow-xl bg-fit bg-center"
-                style="background-image: url('{{ asset('assets/bg_form_2.png') }}')">
+                style="background-image: url('{{ asset('assets/bg-form.png') }}')">
 
                 <h2 class="text-2xl font-bold text-center mb-6">Ubah Profil</h2>
 
@@ -210,38 +115,23 @@
                     @method('PUT')
                     @csrf
                     @if (!Auth::user()->isAdmin())
-                        <div>
-                            <label class="block text-sm font-semibold mb-1">Nama</label>
-                            <input type="text" name="nama"
-                                class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="Masukkan Nama">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold mb-1">Username</label>
-                            <input type="text" name="username"
-                                class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="Masukkan Username">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold mb-1">Nomor Telepon</label>
-                            <input type="text" name="telepon"
-                                class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="Masukkan Nomor Telepon">
-                        </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1">Email</label>
+                        <input type="text" name="email"
+                            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            placeholder="Masukkan Password">
+                    </div>
                     @endif
+                    @if (Auth::user()->isAdmin())
+                        <small class="text-muted">Admin tidak dapat mengubah email.</small>
+                    @endif
+
                     <div>
                         <label class="block text-sm font-semibold mb-1">Password</label>
                         <input type="password" name="password"
                             class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                             placeholder="Masukkan Password">
                     </div>
-                    @if (!Auth::user()->isAdmin())
-                        <div>
-                            <label class="block text-sm font-semibold mb-1">Alamat</label>
-                            <textarea name="alamat" rows="2" placeholder="Masukkan alamat"
-                                class="w-full border border-gray-300 resize-none rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-green-500"></textarea>
-                        </div>
-                    @endif
 
                     <div class="flex justify-between ">
                         <button type="button" @click="showUbahProfil = false"

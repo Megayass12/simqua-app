@@ -1,5 +1,5 @@
 @extends('master.V_Public')
-@section('title', 'Pendaftaran')
+@section('title', 'Verifikasi')
 @section('content')
 
     <section x-data="pendaftaranModal" class="font-sans min-h-screen bg-cover bg-center relative"
@@ -33,7 +33,6 @@
         <!-- Main Content -->
         <div class="flex flex-col items-center justify-center min-h-screen pt-16 px-8 relative z-10">
             <div class="h-[5%] w-full bg-gradient-to-t from-slate-950 to-transparent absolute bottom-0 z-10"></div>
-            <img src="{{ asset('assets/BG-PD.jpg') }}" alt="" class="h-[1012px] w-[1440px] absolute bottom-0">
 
             <div class="bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl shadow-lg p-6 w-full max-w-5xl">
                 <h2 class="text-xl font-semibold text-green-600 pl-4 mb-4">Daftar Registrasi PPMQ Murottilil Qur'an</h2>
@@ -44,7 +43,6 @@
                                 <th class="p-3">No.</th>
                                 <th class="p-3">Nama</th>
                                 <th class="p-3">NISN</th>
-                                <th class="p-3">Email</th>
                                 <th class="p-3">Status</th>
                             </tr>
                         </thead>
@@ -54,7 +52,6 @@
                                     <td class="p-3">{{ $index + 1 }}</td>
                                     <td class="p-3">{{ $item->nama }}</td>
                                     <td class="p-3">{{ $item->nisn }}</td>
-                                    <td class="p-3">{{ $item->email }}</td>
                                     <td class="p-3">
                                         <div class="flex items-center gap-2">
                                             @php
@@ -120,8 +117,7 @@
         <div x-show="showDetailModal" x-cloak x-transition
             class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
             <div @click.outside="showDetailModal = false"
-                class="bg-white rounded-2xl p-8 w-[800px] max-w-full relative text-gray-800 shadow-xl bg-fit bg-center"
-                style="background-image: url('{{ asset('assets/BG-PD.jpg' )}}')">
+                class="bg-white rounded-2xl p-8 w-[800px] max-w-full relative text-gray-800 shadow-xl bg-fit bg-center">
 
                 <h2 class="text-2xl font-bold text-center mb-6">Detail Pendaftar</h2>
 

@@ -74,7 +74,7 @@
                     </div>
                     <div class="flex justify-between border-b border-emerald-900 py-2">
                         <span>Password</span>
-                        <span class="text-right">{{ Auth::user()->password }}</span>
+                        <input type="password" value="password-placeholder" class="bg-transparent text-right" readonly>
                     </div>
                 </div>
 

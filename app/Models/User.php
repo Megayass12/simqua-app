@@ -46,4 +46,10 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
+    public function pendaftarans()
+    {
+    return $this->hasMany(Pendaftaran::class, 'user_id');
+    }
+
 }

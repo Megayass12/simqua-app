@@ -34,7 +34,7 @@
         <div class="flex flex-col items-center justify-center min-h-screen pt-16 px-8 relative z-10">
             <div class="h-[5%] w-full bg-gradient-to-t from-slate-950 to-transparent absolute bottom-0 z-10"></div>
 
-            <div class="bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl shadow-lg p-6 w-full max-w-5xl">
+            <div class="bg-white border border-white/60 rounded-2xl shadow-lg p-6 w-full max-w-5xl">
                 <h2 class="text-xl font-semibold text-green-600 pl-4 mb-4">Daftar Registrasi PPMQ Murottilil Qur'an</h2>
                 <div class="overflow-y-auto max-h-[300px] min-h-[300px] px-4 custom-scrollbar">
                     <table class="min-w-full text-sm text-black">
@@ -71,7 +71,7 @@
                                                 id: '{{ $item->id }}',
                                                 nama: '{{ $item->nama }}',
                                                 nisn: '{{ $item->nisn }}',
-                                                email: '{{ $item->email }}',
+                                                email: '{{ $item->user->email ?? '-' }}',
                                                 no_hp: '{{ $item->no_hp }}',
                                                 tempat: '{{ $item->tempat }}',
                                                 tanggal: '{{ $item->tanggal }}',

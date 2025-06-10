@@ -12,28 +12,31 @@ class C_Pendaftaran extends Controller
 {
     public function pendaftaran()
     {
-        $data = Pendaftaran::where('status', 'Proses')
-            ->where('user_id', auth()->id())
-            ->orderBy('created_at', 'desc')
-            ->get();
+    $data = Pendaftaran::with('user') // Load user relationship
+        ->where('status', 'Proses')
+        ->where('user_id', auth()->id())
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        $hasActiveSubmission = Pendaftaran::where('status', 'Proses')
+    $hasActiveSubmission = Pendaftaran::where('status', 'Proses')
         ->where('user_id', auth()->id())
         ->exists();
 
-        return view('user.V_Pendaftaran', compact('data', 'hasActiveSubmission'));
+    return view('user.V_Pendaftaran', compact('data', 'hasActiveSubmission'));
     }
+
 
 
     public function show($id)
     {
-        $pendaftaran = Pendaftaran::findOrFail($id);
+    $pendaftaran = Pendaftaran::with('user')->findOrFail($id); // Load user relationship
 
-        return response()->json([
-            'status' => 'success',
-            'data' => $pendaftaran,
-        ]);
+    return response()->json([
+        'status' => 'success',
+        'data' => $pendaftaran,
+    ]);
     }
+
 
     // pov admin
     public function adminPendaftaran(Request $request)

@@ -64,7 +64,12 @@
                                     <td class="p-3 text-center">{{ $item->kode }}</td>
                                     <td class="p-3 text-center">
                                         <div class="flex items-center gap-2 justify-center">
-                                            <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+                                            <span class="w-3 h-3 rounded-full
+                                                @if ($item->status === 'Proses') bg-blue-500
+                                                @elseif ($item->status === 'Disetujui') bg-green-500
+                                                @elseif ($item->status === 'Ditolak') bg-red-500
+                                                @endif">
+                                            </span>
                                             {{ $item->status }}
                                         </div>
                                     </td>

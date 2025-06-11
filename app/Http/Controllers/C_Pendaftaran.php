@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pendaftaran;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class C_Pendaftaran extends Controller
@@ -17,13 +18,9 @@ class C_Pendaftaran extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $hasActiveSubmission = Pendaftaran::where('status', 'Proses')
-            ->orWhere('status', 'Disetujui')
-            ->orWhere('status', 'Ditolak')
-            ->where('user_id', auth()->id())
+        $hasActiveSubmission = Pendaftaran::where('user_id', auth()->id())
+            ->whereIn('status', ['Proses', 'Disetujui', 'Ditolak'])
             ->exists();
-
-
         return view('user.V_Pendaftaran', compact('data', 'hasActiveSubmission'));
     }
 
@@ -63,10 +60,9 @@ class C_Pendaftaran extends Controller
             return redirect()->back()->with('error', 'Anda hanya dapat membuat satu pendaftaran dengan status Proses.');
         }
 
-
         $rules = [
             'nama' => 'required|string|max:255',
-            'nisn' => 'required|string|max:11',
+            'nisn' => 'required|string|max:11|unique:pendaftaran,nisn',
             'tempat' => 'required|string|max:255',
             'tanggal' => 'required|date',
             'alamat' => 'required|string',

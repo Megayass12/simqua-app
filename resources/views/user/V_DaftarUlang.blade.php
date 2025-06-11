@@ -2,7 +2,7 @@
 @section('title', 'Daftar Ulang')
 @section('content')
 
-<section class="font-sans min-h-screen bg-cover bg-center relative"
+<section x-data="daftarUlang" class="font-sans min-h-screen bg-cover bg-center relative"
     style="background-image: url('{{ asset('assets/BG-PD.jpg') }}');">
 
     <!-- Header -->
@@ -92,7 +92,8 @@
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('daftarUlang', () => ({
-                showForm: false,
+                showForm: false
+                ,
                 kodePendaftaran: '',
                 openForm(kode) {
                     this.kodePendaftaran = kode;

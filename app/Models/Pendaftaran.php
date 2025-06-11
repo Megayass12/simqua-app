@@ -11,7 +11,7 @@ class Pendaftaran extends Model
     use HasFactory;
     protected $table = 'pendaftaran';
 
-    protected $fillable = ['user_id', 'nama', 'nisn', 'tempat', 'tanggal','alamat','no_hp','kode','status'];
+    protected $fillable = ['user_id', 'nama', 'nisn', 'tempat', 'tanggal','alamat','no_hp','kode','status','file_kk','file_akta'];
 
     public function user(): BelongsTo
     {

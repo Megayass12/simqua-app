@@ -19,6 +19,7 @@ class C_Pendaftaran extends Controller
 
         $hasActiveSubmission = Pendaftaran::where('status', 'Proses')
             ->orWhere('status', 'Disetujui')
+            ->orWhere('status', 'Ditolak')
             ->where('user_id', auth()->id())
             ->exists();
 

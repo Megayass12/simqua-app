@@ -39,7 +39,7 @@ class C_Daful extends Controller
         // Update data pendaftaran di database
         $pendaftaran = Pendaftaran::where('kode', $request->kode)->first();
         $pendaftaran->update([
-            'status_daftar_ulang' => 'completed',
+            'status' => 'Disetujui',
             'file_kk' => $kkPath,
             'file_akta' => $aktaPath,
         ]);

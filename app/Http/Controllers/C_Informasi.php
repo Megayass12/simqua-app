@@ -2,98 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Informasi; // <-- ini WAJIB ADA
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Informasi;
 
-class KatalogController extends Controller
+class C_Informasi extends Controller
 {
-    public function ShowDataKatalog()
+    public function ShowDataInformasi()
     {
-        if (Auth::user()->role_id === 1) {
-            $katalogs = DB::table('katalog')->get();
-            return view('AdminPenjualan.Katalog.HalamanKatalog', compact('katalogs'));
-        } else {
-                $katalogs = Katalog::where('stok', '>', 0)->get();
-            return view('Customer.Katalog.HalamanKatalog', compact('katalogs'));
-        }
-        // return view('AdminPenjualan.Katalog.index', compact('katalog'));
+        $informasi = Informasi::all();
+        $isAdmin = Auth::check() && Auth::user()->role === 'admin';
+        
+        return view('master.V_Informasi', compact('informasi', 'isAdmin'));
     }
 
-    public function ShowFormTambahKatalog()
-    {
-        return view('AdminPenjualan.Katalog.FormTambahKatalog');
-    }
-
-    public function KlikSimpan(Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_produk' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'harga' => 'required|numeric',
-            'stok' => 'required|integer',
-            'foto' => 'required|image|max:2048',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('katalog', 'public');
-        }
-
-        Katalog::create($validated);
-
-        return redirect()->route('admin.katalog.index')->with('success', 'Produk berhasil ditambahkan.');
-    }
-
-    public function ShowFormUbahKatalog($id)
-    {
-        $katalog = Katalog::findOrFail($id);
-        return view('AdminPenjualan.Katalog.FormUbahKatalog', compact('katalog'));
-    }
-
-    public function KlikUbah(Request $request, $id)
-    {
-        $katalog = Katalog::findOrFail($id);
-
-        $validated = $request->validate([
-            'nama_produk' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'harga' => 'required|numeric',
-            'stok' => 'required|integer',
+            'judul' => 'required|string|max:255',
+            'informasi' => 'required|string',
             'foto' => 'nullable|image|max:2048',
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
 
         if ($request->hasFile('foto')) {
-            if ($katalog->foto) {
-                Storage::disk('public')->delete($katalog->foto);
-            }
-            $validated['foto'] = $request->file('foto')->store('katalog', 'public');
+            $validated['foto'] = $request->file('foto')->store('informasi', 'public');
         }
 
-        $katalog->update($validated);
+        Informasi::create($validated);
 
-        return redirect()->route('admin.katalog.index')->with('success', 'Produk berhasil diupdate.');
-    }
-
-    public function destroy($id)
-    {
-        $katalog = Katalog::findOrFail($id);
-        if ($katalog->foto) {
-            Storage::disk('public')->delete($katalog->foto);
-        }
-        $katalog->delete();
-        return response()->json(['success' => true]);
+        return redirect()->route('informasi.index')->with('success', 'Informasi berhasil ditambahkan.');
     }
 
     public function detail($id)
     {
-        $katalog = Katalog::findOrFail($id);
-        return response()->json($katalog);
+        $informasi = Informasi::findOrFail($id);
+        return response()->json($informasi);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $informasi = Informasi::findOrFail($id);
+
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'informasi' => 'required|string',
+            'foto' => 'nullable|image|max:2048',
+        ]);
+
+        if ($request->hasFile('foto')) {
+            // Delete old photo if exists
+            if ($informasi->foto) {
+                Storage::disk('public')->delete($informasi->foto);
+            }
+            $validated['foto'] = $request->file('foto')->store('informasi', 'public');
+        }
+
+        $informasi->update($validated);
+
+        return redirect()->route('informasi.index')->with('success', 'Informasi berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $informasi = Informasi::findOrFail($id);
+        if ($informasi->foto) {
+            Storage::disk('public')->delete($informasi->foto);
+        }
+        $informasi->delete();
+        return response()->json(['success' => true]);
     }
 }

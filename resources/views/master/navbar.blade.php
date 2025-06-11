@@ -21,11 +21,11 @@
                 <a href="{{ route('V_Dashboard') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Home
                 </a>
-                {{-- @if(Route::has('informasi.show'))
-                    <a href="{{ route('informasi.show') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                @if(Route::has('informasi.index'))
+                    <a href="{{ route('informasi.index') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                         Informasi
                     </a>
-                @endif --}}
+                @endif
                 <a href="{{ route('admin.pendaftaran') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Pendaftaran
                 </a>

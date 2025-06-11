@@ -52,9 +52,11 @@ Route::middleware(['user'])->group(function () {
     Route::get('/pendaftaran/{id}', [C_Pendaftaran::class, 'show'])->name('pendaftaran.show');
 
     // Informasi
-    // Route::get('/HalamanKatalog', [KatalogController::class, 'ShowDataKatalog'])->name('ShowDataKatalog');
-    // Route::post('/HalamanKatalog/Keranjang', [TransaksiController::class, 'KlikBeliSekarang'])->name('KlikBeliSekarang');
-    // Route::get('/informasi', [C_Informasi::class, ''])->name->('V_Informasi');
+    Route::get('/informasi', [C_Informasi::class, 'ShowDataInformasi'])->name('informasi.index');
+    Route::post('/informasi', [C_Informasi::class, 'store'])->name('informasi.store');
+    Route::get('/informasi/{id}/detail', [C_Informasi::class, 'detail'])->name('informasi.detail');
+    Route::post('/informasi/{id}/update', [C_Informasi::class, 'update'])->name('informasi.update');
+    Route::delete('/informasi/{id}', [C_Informasi::class, 'destroy'])->name('informasi.destroy');
 
 Route::middleware(['admin'])->group(function () {
     // Verifikasi

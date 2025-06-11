@@ -6,7 +6,7 @@ use App\Http\Controllers\C_Regist;
 use App\Http\Controllers\C_Pendaftaran;
 use App\Http\Controllers\C_Profil;
 use App\Http\Controllers\C_Daful;
-
+use App\Http\Controllers\C_Informasi;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,14 +38,10 @@ Route::post('/logout', [C_Login::class, 'logout'])->name('logout');
 
 // Route yang hanya bisa diakses oleh user yang sudah login (pakai middleware user)
 Route::middleware(['user'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('master.V_Dashboard');
-    })->name('V_Dashboard');
-
-    // Route::get('/profil', [C_Profil::class, 'profil'])->name('V_Profil');
-    // Route::put('/profil', [C_Profil::class, 'update'])->name('profil.update');
-
-
+//     Route::get('/dashboard', function () {
+//         return view('master.V_Dashboard');
+//     })->name('V_Dashboard');
+});
     // Pendaftaran
     Route::get('/pendaftaran', [C_Pendaftaran::class, 'pendaftaran'])->name('V_Pendaftaran');
     Route::get('/daftar-ulang', [C_Daful::class, 'index'])->name('daftarUlang.index');
@@ -54,9 +50,14 @@ Route::middleware(['user'])->group(function () {
     // Pendaftaran
     Route::post('/pendaftaran/simpan', [C_Pendaftaran::class, 'simpan'])->name('pendaftaran.simpan');
     Route::get('/pendaftaran/{id}', [C_Pendaftaran::class, 'show'])->name('pendaftaran.show');
-});
+
+    // Informasi
+    // Route::get('/HalamanKatalog', [KatalogController::class, 'ShowDataKatalog'])->name('ShowDataKatalog');
+    // Route::post('/HalamanKatalog/Keranjang', [TransaksiController::class, 'KlikBeliSekarang'])->name('KlikBeliSekarang');
+    // Route::get('/informasi', [C_Informasi::class, ''])->name->('V_Informasi');
 
 Route::middleware(['admin'])->group(function () {
+    // Verifikasi
     Route::get('/admin/verifikasi', [C_Pendaftaran::class, 'adminPendaftaran'])->name('admin.pendaftaran');
     Route::put('/admin/verifikasi/{id}/{status}', [C_Pendaftaran::class, 'ubahStatus'])->name('admin.verifikasi');
 });
@@ -64,6 +65,9 @@ Route::middleware(['admin'])->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('master.V_Dashboard');
+    })->name('V_Dashboard');
     Route::get('/profil', [C_Profil::class, 'profil'])->name('V_Profil');
     Route::put('/profil', [C_Profil::class, 'update'])->name('profil.update');
 });

@@ -30,15 +30,14 @@
                     Pendaftaran
                 </a>
             @elseif(isset($isCalonSantri) && $isCalonSantri)
+
                 <!-- Menu untuk Calon Santri -->
                 <a href="{{ route('V_Dashboard') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Home
                 </a>
-                {{-- @if(Route::has('V_Informasi'))
-                <a href="{{ route('V_Informasi') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                <a href="{{ route('informasi.index') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Informasi
                 </a>
-                @endif --}}
                 <a href="{{ route('V_Pendaftaran') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Pendaftaran
                 </a>

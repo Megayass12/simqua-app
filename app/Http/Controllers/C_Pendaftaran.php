@@ -100,6 +100,12 @@ class C_Pendaftaran extends Controller
     public function ubahStatus(Request $request, $id, $status)
     {
         $pendaftaran = Pendaftaran::findOrFail($id);
+
+         if ($pendaftaran->status !== 'Proses') {
+        return redirect()->back()->with('error', 'Status sudah diverifikasi dan tidak dapat diubah lagi.');
+        }
+
+
         $pendaftaran->status = $status;
         $pendaftaran->save();
 

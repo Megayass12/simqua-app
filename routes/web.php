@@ -7,7 +7,7 @@ use App\Http\Controllers\C_Pendaftaran;
 use App\Http\Controllers\C_Profil;
 use App\Http\Controllers\C_Daful;
 use App\Http\Controllers\C_Informasi;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,3 +73,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profil', [C_Profil::class, 'profil'])->name('V_Profil');
     Route::put('/profil', [C_Profil::class, 'update'])->name('profil.update');
 });
+
+// Route untuk reset password
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');

@@ -94,6 +94,12 @@
                         class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-green-500">
                 </div>
 
+                <div class="text-center mt-4">
+                    <a href="{{ route('password.request') }}" class="text-blue-500 hover:underline">
+                        Lupa Password?
+                    </a>
+                </div>
+
                 <!-- Submit Button -->
                 <button type="submit"
                     class="w-full bg-green-500 text-white font-semibold py-3 rounded-lg hover:bg-green-800 transition">

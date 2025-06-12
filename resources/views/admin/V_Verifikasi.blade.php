@@ -30,6 +30,27 @@
             </div>
         @endif
 
+        @if (session('error'))
+            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" data-error-alert
+                class="fixed bottom-5 right-5 z-50 w-full max-w-sm bg-red-600 text-white rounded-xl p-4 shadow-lg flex items-start gap-3 animate-slide-up transition-all duration-500 ease-in-out">
+
+                <div
+                    class="flex-shrink-0 bg-transparent rounded-full w-14 h-14 flex items-center justify-center overflow-hidden">
+                    <img src="{{ asset('assets/ppmq.png') }}" alt="PPMQ Logo" class="h-6 w-6 object-cover">
+                </div>
+
+                <div class="flex-grow">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold">Gagal!</h3>
+                        <button @click="show = false"
+                            class="text-white hover:text-gray-200 text-xl leading-none">&times;</button>
+                    </div>
+                    <p class="text-sm mt-1">{{ session('error') }}</p>
+                </div>
+            </div>
+        @endif
+
+
         <!-- Main Content -->
         <div class="flex flex-col items-center justify-center min-h-screen pt-16 px-8 relative z-10">
             <div class="h-[5%] w-full bg-gradient-to-t from-slate-950 to-transparent absolute bottom-0 z-10"></div>
@@ -160,11 +181,12 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-end mt-6 space-x-3">
+                    <div class="relative flex justify-end mt-6 space-x-3">
                         <div class="relative" x-data="{ openDropdown: false }">
                             <!-- Tombol utama -->
-                            <button @click="openDropdown = !openDropdown"
-                                class="bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg font-semibold transition">
+                            <button :disabled="detailUser.status !== 'Proses'" @click="openDropdown = !openDropdown"
+                                class="bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg font-semibold transition"
+                                :class="detailUser.status !== 'Proses' ? 'opacity-50 cursor-not-allowed' : ''">
                                 Verifikasi
                             </button>
 

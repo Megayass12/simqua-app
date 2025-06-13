@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <a href="{{ route('password.request') }}" class="text-blue-500 hover:underline">
+                    <a href="{{ route('password.request') }}" class="text-red-500 hover:underline">
                         Lupa Password?
                     </a>
                 </div>

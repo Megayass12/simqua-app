@@ -36,7 +36,7 @@ class C_Login extends Controller
             $user = Auth::user(); // Ambil user yang sedang login
 
             if ($user->role === 'admin') {
-                return redirect()->route('admin.pendaftaran')->with('success', 'Selamat datang, Admin!');
+                return redirect()->route('V_Dashboard')->with('success', 'Selamat datang, Admin!');
             } elseif ($user->role === 'calon_santri') {
                 return redirect()->route('V_Dashboard')->with('success', 'Selamat datang di Dashboard Calon Santri!');
             }

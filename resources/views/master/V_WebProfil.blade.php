@@ -411,6 +411,5 @@
                 }
             });
         </script>
-
     </body>
 @endsection

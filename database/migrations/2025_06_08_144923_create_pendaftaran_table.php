@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('no_hp');
             $table->enum('status', ['Proses', 'Disetujui', 'Ditolak'])->default('Proses');
-            $table->text('feedback')->nullable();
+            $table->string('file_kk')->nullable();
+            $table->string('file_akta')->nullable();
             $table->timestamps();
         });
     }

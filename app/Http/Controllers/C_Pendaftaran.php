@@ -101,7 +101,7 @@ class C_Pendaftaran extends Controller
     {
         $pendaftaran = Pendaftaran::findOrFail($id);
 
-         if ($pendaftaran->status !== 'Proses') {
+            if ($pendaftaran->status !== 'Proses') {
         return redirect()->back()->with('error', 'Status sudah diverifikasi dan tidak dapat diubah lagi.');
         }
 

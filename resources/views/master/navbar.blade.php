@@ -29,6 +29,9 @@
                 <a href="{{ route('admin.pendaftaran') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
                     Pendaftaran
                 </a>
+                <a href="{{ route('daftarUlang.index') }}" class="text-white hover:bg-white/10 hover:rounded-lg px-1 hover:border-t hover:border-white">
+                    Daftar Ulang
+                </a>
             @elseif(isset($isCalonSantri) && $isCalonSantri)
 
                 <!-- Menu untuk Calon Santri -->

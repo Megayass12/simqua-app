@@ -72,6 +72,9 @@ Route::middleware(['auth'])->group(function () {
     })->name('V_Dashboard');
     Route::get('/profil', [C_Profil::class, 'profil'])->name('V_Profil');
     Route::put('/profil', [C_Profil::class, 'update'])->name('profil.update');
+
+    Route::post('/daftar-ulang', [C_Daful::class, 'simpanDaftarUlang'])->name('daftarUlang.store');
+    Route::post('/daftar-ulang/confirm', [C_Daful::class, 'confirmPayment'])->name('daftarUlang.confirm');
 });
 
 // Route untuk reset password

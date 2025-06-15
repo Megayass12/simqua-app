@@ -6,13 +6,14 @@
         style="background-image: url({{ asset('assets/pondok.jpg') }})">
 
         <!-- Header -->
-        <header class="absolute top-0 left-0 w-full z-50 px-20 py-6">
-            <!-- Logo -->
-            <div class="flex items-center text-white text-xl font-semibold">
-                <img src="{{ asset('assets/ppmq.png') }}" alt="Simbako Logo" class="h-20">
-                <span class="ml-4 text-white">PPMQ GUMUK KEMBAR</span>
+        <header class="absolute top-0 left-0 w-full z-50 px-10 py-4">
+            <!-- Logo Container -->
+            <div class="flex items-center bg-white/10 backdrop-blur-md rounded-full px-8 py-3 shadow-lg">
+                <img src="{{ asset('assets/ppmq.png') }}" alt="PPMQ Logo" class="h-12">
+                <span class="ml-4 text-emerald-950 text-xl font-semibold tracking-wide">PPMQ GUMUK KEMBAR</span>
             </div>
         </header>
+
 
         <!-- Notifikasi Login Gagal -->
         @if (session('failed'))
@@ -21,7 +22,7 @@
                 <!-- Logo -->
                 <div
                     class="flex-shrink-0 bg-transparent rounded-full w-14 h-14 flex items-center justify-center overflow-hidden">
-                    <img src="{{ asset('assets/rawlogo.png') }}" alt="Logo" class="h-6 w-6 object-cover">
+                    <img src="{{ asset('assets/ppmq.png') }}" alt="Logo" class="h-6 w-6 object-cover">
                 </div>
 
                 <!-- Isi alert -->
@@ -43,7 +44,7 @@
                 <!-- Logo -->
                 <div
                     class="flex-shrink-0 bg-transparent rounded-full w-14 h-14 flex items-center justify-center overflow-hidden">
-                    <img src="{{ asset('assets/rawlogo.png') }}" alt="Logo" class="h-6 w-6 object-cover">
+                    <img src="{{ asset('assets/ppmq.png') }}" alt="Logo" class="h-6 w-6 object-cover">
                 </div>
 
                 <!-- Isi alert -->

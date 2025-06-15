@@ -96,7 +96,8 @@
                                                 no_hp: '{{ $item->no_hp }}',
                                                 tempat: '{{ $item->tempat }}',
                                                 tanggal: '{{ $item->tanggal }}',
-                                                alamat: '{{ $item->alamat }}'
+                                                alamat: '{{ $item->alamat }}',
+                                                status: '{{ $item->status }}'
                                             })"
                                             class="bg-green-500 hover:bg-green-700 text-white px-4 py-1 rounded-md transition">
                                             Detail
@@ -182,19 +183,43 @@
                     </div>
 
                     <div class="relative flex justify-end mt-6 space-x-3">
-                        <div class="relative" x-data="{ openDropdown: false }">
-                            <!-- Tombol utama -->
-                            <button :disabled="detailUser.status !== 'Proses'" @click="openDropdown = !openDropdown"
-                                class="bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg font-semibold transition"
-                                :class="detailUser.status !== 'Proses' ? 'opacity-50 cursor-not-allowed' : ''">
-                                Verifikasi
-                            </button>
+                        <!-- Tampilkan status saat ini -->
+                        <div class="flex items-center gap-2 mr-4">
+                            <span class="text-sm font-semibold">Status:</span>
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full"
+                                    :class="{
+                                        'bg-blue-500': detailUser.status === 'Proses',
+                                        'bg-green-500': detailUser.status === 'Disetujui',
+                                        'bg-red-500': detailUser.status === 'Ditolak'
+                                    }"></span>
+                                <span x-text="detailUser.status" class="text-sm font-medium"></span>
+                            </div>
+                        </div>
 
-                            <!-- Dropdown -->
-                            <div x-show="openDropdown" @click.outside="openDropdown = false" x-cloak
+                        <div class="relative" x-data="{ openDropdown: false }">
+                            <!-- Tombol Verifikasi - hanya aktif jika status = 'Proses' -->
+                            <template x-if="detailUser.status === 'Proses'">
+                                <button @click="openDropdown = !openDropdown"
+                                    class="bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg font-semibold transition">
+                                    Verifikasi
+                                </button>
+                            </template>
+
+                            <!-- Tombol disabled jika status bukan 'Proses' -->
+                            <template x-if="detailUser.status !== 'Proses'">
+                                <button disabled
+                                    class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold cursor-not-allowed opacity-50">
+                                    Sudah Diverifikasi
+                                </button>
+                            </template>
+
+                            <!-- Dropdown - hanya muncul jika status = 'Proses' -->
+                            <div x-show="openDropdown && detailUser.status === 'Proses'"
+                                @click.outside="openDropdown = false" x-cloak
                                 class="absolute right-0 mt-2 bg-white shadow-lg rounded-xl border px-4 py-3 flex gap-3 z-50">
 
-                                <!-- Verifikasi -->
+                                <!-- Tombol Terima -->
                                 <form method="POST" :action="'/admin/verifikasi/' + detailUser.id + '/Disetujui'">
                                     @csrf
                                     @method('PUT')
@@ -204,6 +229,7 @@
                                     </button>
                                 </form>
 
+                                <!-- Tombol Tolak -->
                                 <form method="POST" :action="'/admin/verifikasi/' + detailUser.id + '/Ditolak'">
                                     @csrf
                                     @method('PUT')
@@ -213,8 +239,9 @@
                                     </button>
                                 </form>
                             </div>
-
                         </div>
+
+                        <!-- Tombol Tutup -->
                         <button @click="showDetailModal = false"
                             class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-semibold">
                             Tutup
@@ -240,12 +267,47 @@
                     tempat: '',
                     tanggal: '',
                     alamat: '',
+                    status: '',
                 },
                 openDetail(user) {
                     this.detailUser = user;
                     this.showDetailModal = true;
                 },
-            }))
+                verifikasi(statusBaru) {
+                    // Cek apakah status masih 'Proses' sebelum melakukan verifikasi
+                    if (this.detailUser.status !== 'Proses') {
+                        alert('Status sudah diubah, tidak dapat melakukan verifikasi lagi.');
+                        return;
+                    }
+
+                    fetch(`/admin/verifikasi/${this.detailUser.id}/${statusBaru}`, {
+                            method: 'PUT',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                    .content,
+                                'Content-Type': 'application/json',
+                            },
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                // Update status di frontend
+                                this.detailUser.status = statusBaru;
+
+                                // Refresh halaman setelah berhasil untuk update tabel
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1000);
+
+                                this.showDetailModal = false;
+                            } else {
+                                console.error('Gagal memperbarui status:', response.statusText);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Terjadi kesalahan:', error);
+                        });
+                },
+            }));
         });
     </script>
 

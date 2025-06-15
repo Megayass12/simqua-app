@@ -101,14 +101,26 @@ class C_Pendaftaran extends Controller
     {
         $pendaftaran = Pendaftaran::findOrFail($id);
 
-            if ($pendaftaran->status !== 'Proses') {
-        return redirect()->back()->with('error', 'Status sudah diverifikasi dan tidak dapat diubah lagi.');
+        // Validasi jika status final tidak bisa diubah lagi
+        if (in_array($pendaftaran->status, ['Disetujui', 'Ditolak'])) {
+            return redirect()->back()->with('error', 'Status final tidak dapat diubah.');
         }
-
 
         $pendaftaran->status = $status;
         $pendaftaran->save();
 
-        return redirect()->back()->with('success', "Status berhasil diubah {$status}.");
+        return redirect()->back()->with('success', "Status berhasil diubah ke {$status}.");
+
+
+        // $pendaftaran = Pendaftaran::findOrFail($id);
+
+        // if ($pendaftaran->status !== 'Proses') {
+        // return redirect()->back()->with('error', 'Status sudah diverifikasi dan tidak dapat diubah lagi.');
+        // }
+
+        // $pendaftaran->status = $status;
+        // $pendaftaran->save();
+
+        // return redirect()->back()->with('success', "Status berhasil diubah {$status}.");
     }
 }

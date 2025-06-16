@@ -50,9 +50,9 @@ class C_Daful extends Controller
                 'file_kk' => $kkPath,
                 'file_akta' => $aktaPath,
                 'kode_pembayaran' => $orderId,
-                'status_pembayaran' => 'pending'
+                'status_pembayaran' => 'Belum Dibayar'
             ]);
-            
+
             // Siapkan parameter untuk Snap
             $params = [
                 'transaction_details' => [
@@ -79,7 +79,6 @@ class C_Daful extends Controller
 
             DB::commit();
 
-            // Kembalikan response dengan Snap Token
             return response()->json([
                 'status' => 'success',
                 'snap_token' => $snapToken,
@@ -95,7 +94,6 @@ class C_Daful extends Controller
         }
     }
 
-    // Fungsi untuk update status setelah pembayaran (dipanggil manual dari frontend)
     public function confirmPayment(Request $request)
     {
         $request->validate([
@@ -104,13 +102,53 @@ class C_Daful extends Controller
 
         $pendaftaran = Pendaftaran::where('kode_pembayaran', $request->order_id)->first();
         $pendaftaran->update([
-            'status_pembayaran' => 'success',
-            'status' => 'Disetujui'
+            'status_pembayaran' => 'Lunas'
         ]);
 
         return response()->json([
             'status' => 'success',
             'message' => 'Status pembayaran berhasil diupdate'
         ]);
+    }
+
+    public function verifikasiIndex()
+    {
+        $data = Pendaftaran::where('status', 'Disetujui')
+                ->whereNotNull('file_kk')
+                ->whereNotNull('file_akta')
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+        return view('admin.V_VerifDaful', compact('data'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:Belum Dibayar,Lunas'
+        ]);
+
+        $pendaftaran = Pendaftaran::findOrFail($id);
+        
+        DB::beginTransaction();
+        try {
+            $pendaftaran->update([
+                'status_pembayaran' => $request->status_pembayaran
+            ]);
+
+            DB::commit();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Status pembayaran berhasil diupdate'
+            ]);
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengupdate status: ' . $e->getMessage()
+            ], 500);
+        }
     }
 }

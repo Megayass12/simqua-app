@@ -24,6 +24,8 @@ return new class extends Migration
             $table->enum('status', ['Proses', 'Disetujui', 'Ditolak'])->default('Proses');
             $table->string('file_kk')->nullable();
             $table->string('file_akta')->nullable();
+            $table->string('kode_pembayaran')->nullable();
+            $table->enum('status_pembayaran', ['Belum Dibayar', 'Lunas'])->default('Belum Dibayar');
             $table->timestamps();
         });
     }

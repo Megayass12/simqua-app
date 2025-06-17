@@ -54,7 +54,7 @@
                                 <td class="p-3">
                                     @if($item->file_kk)
                                         <a href="{{ asset('storage/'.$item->file_kk) }}" target="_blank" 
-                                           class="text-blue-600 hover:underline">
+                                            class="text-blue-600 hover:underline">
                                             Lihat File
                                         </a>
                                     @else
@@ -64,7 +64,7 @@
                                 <td class="p-3">
                                     @if($item->file_akta)
                                         <a href="{{ asset('storage/'.$item->file_akta) }}" target="_blank" 
-                                           class="text-blue-600 hover:underline">
+                                            class="text-blue-600 hover:underline">
                                             Lihat File
                                         </a>
                                     @else

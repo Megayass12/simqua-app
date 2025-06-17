@@ -12,12 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pendaftaran', function (Blueprint $table) {
-            // Tambahkan kolom kode_pembayaran (nullable, string)
             $table->string('kode_pembayaran')
                 ->nullable()
                 ->after('file_akta');
 
-            // Tambahkan kolom status_pembayaran (enum dengan default 'Belum Dibayar')
             $table->enum('status_pembayaran', ['Belum Dibayar', 'Lunas'])
                 ->default('Belum Dibayar')
                 ->after('kode_pembayaran');

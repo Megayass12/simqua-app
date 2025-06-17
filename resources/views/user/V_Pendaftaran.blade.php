@@ -8,7 +8,7 @@
 
         @if (session('success'))
             <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" data-success-alert
-                class="fixed bottom-5 right-5 z-60 w-full max-w-sm bg-green-600 text-white rounded-xl p-4 shadow-lg flex items-start gap-3 animate-slide-up transition-all duration-500 ease-in-out">
+                class="fixed bottom-5 right-5 z-[9999] w-full max-w-sm bg-green-600 text-white rounded-xl p-4 shadow-lg flex items-start gap-3 animate-slide-up transition-all duration-500 ease-in-out">
                 <div class="flex-shrink-0 w-10 h-10 bg-white rounded-full flex items-center justify-center">
                     <img src="{{ asset('assets/ppmq.png') }}" alt="Logo" class="h-6 w-6">
                 </div>
@@ -22,7 +22,7 @@
 
         @if ($errors->any())
             <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" data-error-alert
-                class="fixed bottom-5 right-5 z-60 w-full max-w-sm bg-red-600 text-white rounded-xl p-4 shadow-lg flex items-start gap-3 animate-slide-up transition-all duration-500 ease-in-out">
+                class="fixed bottom-5 right-5 z-[9999] w-full max-w-sm bg-red-600 text-white rounded-xl p-4 shadow-lg flex items-start gap-3 animate-slide-up transition-all duration-500 ease-in-out">
                 <div class="flex-shrink-0 w-10 h-10 bg-white rounded-full flex items-center justify-center">
                     <img src="{{ asset('assets/ppmq.png') }}" alt="Logo" class="h-6 w-6">
                 </div>
@@ -185,7 +185,6 @@
             </div>
         </div>
 
-        @include('master.footer')
     </section>
 
     <script>

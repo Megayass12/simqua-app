@@ -58,7 +58,7 @@
         @endif
 
         <!-- MAIN -->
-        <div class="flex items-center justify-center min-h-screen bg-cover px-4 py-8" 
+        <div class="flex items-center justify-center min-h-screen bg-cover px-4 py-8"
             style="background-image: url({{ asset('assets/BG-PD.jpg') }})">
             <div class="w-full max-w-2xl bg-white border-black/60 rounded-2xl shadow-lg p-6 text-emerald-900 relative">
                 <!-- HEADER -->
@@ -146,9 +146,6 @@
                 </form>
             </div>
         </div>
-
-        {{-- Footer --}}
-        @include('master.footer')
 
     </section>
     <script>

@@ -251,8 +251,6 @@
             </div>
         </div>
 
-        <!-- Footer -->
-        @include('master.footer')
     </section>
     <script>
         document.addEventListener("alpine:init", () => {

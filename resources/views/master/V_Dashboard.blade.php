@@ -206,6 +206,5 @@
             </div>
         </div>
     </section>
-    <!-- Footer -->
-    @include('master.footer')
+
 @endsection

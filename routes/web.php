@@ -75,12 +75,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/daftar-ulang', [C_Daful::class, 'simpanDaftarUlang'])->name('daftarUlang.store');
     Route::post('/daftar-ulang/confirm', [C_Daful::class, 'confirmPayment'])->name('daftarUlang.confirm');
+    Route::post('/admin/daftar-ulang/{id}/update-status', [C_Daful::class, 'updateStatusPembayaran']);
 });
 
 // Route untuk admin
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/verifikasi-daftar-ulang', [C_Daful::class, 'verifikasiIndex'])->name('admin.verifDaful');
-    Route::post('/admin/daftar-ulang/{id}/update-status', [C_Daful::class, 'updateStatus'])->name('admin.daful.updateStatus');
+    Route::post('/admin/daftar-ulang/{id}/update-status', [C_Daful::class, 'updateStatusPembayaran'])->name('admin.daful.updateStatus');
 });
 
 // Route untuk reset password

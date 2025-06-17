@@ -365,8 +365,6 @@
             </div>
         </section>
 
-        @include('master.footer')
-
         <script>
             // Scroll animations
             const observerOptions = {

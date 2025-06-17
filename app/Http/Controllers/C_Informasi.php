@@ -14,7 +14,7 @@ class C_Informasi extends Controller
     {
         $informasi = Informasi::all();
         $isAdmin = Auth::check() && Auth::user()->role === 'admin';
-        
+
         return view('master.V_Informasi', compact('informasi', 'isAdmin'));
     }
 
@@ -48,7 +48,7 @@ class C_Informasi extends Controller
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'informasi' => 'required|string',
-            'foto' => 'nullable|image|max:2048',
+            'foto' => 'nullable|image',
         ]);
 
         if ($request->hasFile('foto')) {

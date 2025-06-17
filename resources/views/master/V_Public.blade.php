@@ -10,6 +10,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="icon" href="{{ asset('assets/ppmq.png') }}" type="image/png">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,18 +22,30 @@
     <script>
         tailwind.config = {
             theme: {
-                fontFamily:{
+                fontFamily: {
                     Poppins: ["Poppins", "sans-serif"]
                 }
             }
         }
     </script>
-    <style>[x-cloak] { display: none !important; }</style>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
     <title>Simqua | @yield('title')</title>
 </head>
 
-<body class="font-Poppins">
+<body class="font-Poppins flex flex-col min-h-screen">
 
-    @yield('content')
+    {{-- Konten utama --}}
+    <main class="flex-1">
+        @yield('content')
+    </main>
+
+    {{-- Footer di luar content --}}
+    @include('master.footer')
+
+</body>
 
 </html>
